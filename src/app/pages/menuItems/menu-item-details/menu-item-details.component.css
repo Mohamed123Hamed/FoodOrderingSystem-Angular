@@ -1,0 +1,11 @@
+.card {
+  border-radius: 0.75rem;
+}
+
+.card-title {
+  font-size: 1.5rem;
+}
+
+.card-text {
+  font-size: 1.2rem;
+}

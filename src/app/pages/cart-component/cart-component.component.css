@@ -1,0 +1,12 @@
+.card {
+  border: 1px solid #eee;
+  border-radius: 10px;
+}
+
+.card img {
+  border-radius: 10px;
+}
+
+.card .btn {
+  min-width: 36px;
+}

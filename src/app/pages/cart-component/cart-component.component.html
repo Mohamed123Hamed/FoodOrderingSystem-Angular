@@ -1,0 +1,45 @@
+<div class="container my-5">
+  <h3 class="fw-bold mb-4 text-center">Your Reservation Details</h3>
+
+  <table class="table table-bordered text-center">
+    <thead class="bg-warning text-dark">
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Name</td>
+        <td>{{ reservation.name }}</td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td>{{ reservation.phone }}</td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>{{ reservation.email }}</td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>{{ reservation.address }}</td>
+      </tr>
+      <tr>
+        <td>Item</td>
+        <td>{{ reservation.itemName }}</td>
+      </tr>
+      <tr class="table-warning fw-bold">
+        <td>Price</td>
+        <td>{{ reservation.price }} EGP</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end mt-4">
+  <button class="btn btn-warning" routerLink="/checkout">
+    <i class="fas fa-credit-card me-1"></i> Proceed to Checkout
+  </button>
+</div>
+
+</div>
+

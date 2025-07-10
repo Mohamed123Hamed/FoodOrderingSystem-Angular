@@ -1,0 +1,27 @@
+.hero-section {
+  /* background: url('/images/hero.jpg') no-repeat center center/cover; */
+  background: url('/images/herro2.avif') no-repeat center center/cover;
+  padding: 80px 0;
+  position: relative;
+}
+
+.hero-section .overlay {
+  background-color: rgba(0, 0, 0, 0.65);
+  padding: 60px 20px;
+}
+
+.hero-section h1 {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.hero-section h1 span {
+  color: #ffc107;
+}
+
+.stat-box {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  color: #fff;
+}

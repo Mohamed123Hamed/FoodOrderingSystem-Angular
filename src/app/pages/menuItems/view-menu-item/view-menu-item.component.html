@@ -1,0 +1,29 @@
+<div class="container my-5">
+  <h3 class="fw-bold mb-4 text-primary">Menu Items</h3>
+
+  <div class="row g-4">
+    <div class="col-md-4" *ngFor="let item of menuItems; let i = index">
+      <div class="card h-100 shadow-sm">
+        <img [src]="item.imageUrl || menuImages[i % menuImages.length]" class="card-img-top" style="height:200px; object-fit:cover;">
+        
+        <div class="card-body">
+          <h5 class="card-title">
+            <i class="fas fa-check-circle text-warning me-2"></i>
+            {{ item.name }}
+          </h5>
+          <p class="card-text text-muted">
+            {{ item.description || 'Delicious food served hot and fresh.' }}
+          </p>
+          
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <span class="fw-bold text-success">{{ item.price }} EGP</span>
+            <button class="btn btn-warning btn-sm"  [routerLink]="['/reserve', item.id]" [queryParams]="{ price: item.price,itemName:item.itemName }" (click)="addToCart(item)">
+              <i class="fas fa-cart-plus me-1"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

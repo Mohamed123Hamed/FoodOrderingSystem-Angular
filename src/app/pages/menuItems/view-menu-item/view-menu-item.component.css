@@ -1,0 +1,13 @@
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-title i {
+  font-size: 14px;
+}

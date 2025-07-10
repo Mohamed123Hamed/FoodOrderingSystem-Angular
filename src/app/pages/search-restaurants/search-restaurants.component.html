@@ -1,0 +1,62 @@
+<!-- Hero Section -->
+<div class="hero-section text-white text-center">
+  <div class="overlay">
+    <h1>Order <span>Food Online</span> From the <span>Best Restaurants</span></h1>
+
+    <div class="search-bar container mt-4">
+      <div class="row g-3">
+        <div class="col-md-5">
+          <input type="text" class="form-control" placeholder="Restaurant Name"
+                 [(ngModel)]="searchTerm" (input)="filterRestaurants()">
+        </div>
+        <div class="col-md-5">
+          <select class="form-select" [(ngModel)]="selectedCityId" (change)="onCityChange()">
+            <option value="" disabled selected>Select City</option>
+            <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-warning w-100" (click)="filterRestaurants()">Search</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats container text-center mt-5">
+      <div class="row g-3">
+        <div class="col" *ngFor="let stat of [137, 158, '659K', 235]; let i=index">
+          <div class="stat-box">
+            <h2>{{ stat }}</h2>
+            <p>{{ ['Restaurants', 'People Served', 'Happy Service', 'Regular Users'][i] }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Restaurants Grid Section -->
+<div class="container py-5">
+  <div class="row g-3">
+    <div class="col-md-4" *ngFor="let restaurant of filteredRestaurants; let i = index">
+      <div class="card h-100 shadow-sm">
+        <img [src]="menuImages[i % menuImages.length]" class="card-img-top"
+             style="height:200px; object-fit:cover;">
+        <div class="card-body">
+          <h5 class="card-title text-primary fw-bold">{{ restaurant.name }}</h5>
+          <div class="mb-2">
+            <i class="fas fa-star text-warning" *ngFor="let n of [1,2,3,4]"></i>
+            <i class="fas fa-star text-secondary"></i>
+          </div>
+          <!-- <button class="btn btn-outline-primary w-100" (click)="viewMenu(restaurant.id)">
+            <i class="fas fa-utensils me-1"></i> View Menu
+          </button> -->
+          <button class="btn btn-outline-primary w-100" [routerLink]="['/menu-items', restaurant.id]">
+            <i class="fas fa-utensils me-1"></i> View Menu
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
