@@ -1,6 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { OrderService } from '../../shared/services/order.service';
 
 @Component({
   selector: 'app-my-orders',
@@ -14,7 +15,7 @@ orders: any[] = [];
   loading = false;
   error = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private _orderService: OrderService) {}
 
   ngOnInit() {
     const storedPhone = localStorage.getItem('userPhone');
@@ -26,19 +27,20 @@ orders: any[] = [];
     }
   }
 
-  fetchOrders() {
-    this.loading = true;
-    this.http.get<any>(`https://localhost:7059/api/Order/by-phone/${this.phone}`)
-      .subscribe({
-        next: (res) => {
-          this.orders = res.data;
-          this.loading = false;
-        },
-        error: (err) => {
-          this.error = 'No orders found or server error.';
-          this.loading = false;
-        }
-      });
-  }
+fetchOrders() {
+  this.loading = true;
+  this.error = '';
+
+  this._orderService.getOrdersByPhone(this.phone).subscribe({
+    next: (res) => {
+      this.orders = res.data;
+      this.loading = false;
+    },
+    error: (err) => {
+      this.error = 'No orders found or server error.';
+      this.loading = false;
+    }
+  });
+}
 
 }

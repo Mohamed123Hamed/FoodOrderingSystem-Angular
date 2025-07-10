@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { OrderService } from '../../../shared/services/order.service';
 
 @Component({
   standalone: true,
@@ -13,14 +13,17 @@ import { HttpClient } from '@angular/common/http';
 export class MenuItemDetailsComponent {
   menuItem: any;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute,
+     private _OrderService: OrderService) {}
 
-  ngOnInit() {
+   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.http.get<any>(`https://localhost:7059/api/MenuItem/${id}`)
-      .subscribe({
+    if (id) {
+      this._OrderService.getMenuItemById(id).subscribe({
         next: res => this.menuItem = res.data,
         error: err => console.error('Error fetching menu item', err)
       });
+    }
   }
+
 }

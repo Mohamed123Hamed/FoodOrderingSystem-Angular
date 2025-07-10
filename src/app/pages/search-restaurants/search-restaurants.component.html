@@ -21,7 +21,6 @@
       </div>
     </div>
 
-    <!-- Stats Section -->
     <div class="stats container text-center mt-5">
       <div class="row g-3">
         <div class="col" *ngFor="let stat of [137, 158, '659K', 235]; let i=index">
@@ -35,7 +34,6 @@
   </div>
 </div>
 
-<!-- Restaurants Grid Section -->
 <div class="container py-5">
   <div class="row g-3">
     <div class="col-md-4" *ngFor="let restaurant of filteredRestaurants; let i = index">
@@ -48,9 +46,6 @@
             <i class="fas fa-star text-warning" *ngFor="let n of [1,2,3,4]"></i>
             <i class="fas fa-star text-secondary"></i>
           </div>
-          <!-- <button class="btn btn-outline-primary w-100" (click)="viewMenu(restaurant.id)">
-            <i class="fas fa-utensils me-1"></i> View Menu
-          </button> -->
           <button class="btn btn-outline-primary w-100" [routerLink]="['/menu-items', restaurant.id]">
             <i class="fas fa-utensils me-1"></i> View Menu
           </button>

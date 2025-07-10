@@ -35,15 +35,6 @@ export class ReserveComponentComponent implements OnInit {
     this.totalPrice = this.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }
 
-  // confirmReservation() {
-  //   this.orderService.reservation = {
-  //     ...this.reservation,
-  //     totalPrice: this.totalPrice,
-  //     items: this.cartItems
-  //   };
-  //   this.toastr.success(`successfuly confrimation`);
-  //   this.router.navigate(['/cart']);
-  // }
   confirmReservation() {
   if (!this.reservation.name || !this.reservation.phone || !this.reservation.email || !this.reservation.address) {
     this.toastr.error('Please fill in all required fields correctly.');

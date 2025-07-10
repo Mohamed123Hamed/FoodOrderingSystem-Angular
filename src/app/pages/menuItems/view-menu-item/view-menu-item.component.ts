@@ -1,5 +1,4 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { OrderService } from '../../../shared/services/order.service';
@@ -25,7 +24,6 @@ export class ViewMenuItemComponent implements OnInit {
     private orderService: OrderService,
     private router: Router,
     private toastr: ToastrService,
-    private http: HttpClient
   ) {}
 
   menuImages: string[] = [
@@ -41,16 +39,15 @@ export class ViewMenuItemComponent implements OnInit {
     this.loadMenuItems();
   }
 
-  loadMenuItems() {
-    this.http.get<any[]>(`https://localhost:7059/api/MenuItem/GetByRestaurantId/${this.restaurantId}`)
-      .subscribe({
-        next: (data) => {
-          console.log(data);
-          this.menuItems = data;
-        },
-        error: (err) => console.error('Error fetching menu items', err)
-      });
-  }
+loadMenuItems() {
+  this.orderService.getByRestaurantId(this.restaurantId).subscribe({
+    next: (data) => {
+      console.log(data);
+      this.menuItems = data;
+    },
+    error: (err) => console.error('Error fetching menu items', err)
+  });
+}
 
   get paginatedItems() {
     const start = (this.currentPage - 1) * this.itemsPerPage;

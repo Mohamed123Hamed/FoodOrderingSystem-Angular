@@ -12,12 +12,6 @@
           </p>
           <div class="d-flex justify-content-between align-items-center">
             <span class="fw-bold text-success">{{ item.price }} EGP</span>
-            <!-- <button class="btn btn-outline-warning btn-sm" (click)="handleAddAndReserve(item)">
-              <i class="fas fa-cart-plus me-1"></i> Add
-            </button> -->
-            <!-- <button class="btn btn-outline-warning btn-sm" (click)="addToCart(item)">
-              <i class="fas fa-cart-plus me-1"></i> Add
-            </button> -->
         <button *ngIf="!isInCart(item.id)" class="btn btn-outline-warning btn-sm" (click)="addToCart(item)">
           <i class="fas fa-cart-plus me-1"></i> Add
         </button>
