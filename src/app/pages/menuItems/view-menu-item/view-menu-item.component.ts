@@ -86,29 +86,29 @@ loadMenuItems() {
   }
 
 
-addToCart(item: any) {
-  const existItem = this.orderService.cart.find(x => x.menuItemId === item.id);
-  if (existItem) {
-    existItem.quantity += 1;
-    this.toastr.info(`${item.name} quantity increased`);
-  } else {
-    this.orderService.cart.push({
-      menuItemId: item.id,
-      name: item.name,
-      price: item.price,
-      quantity: 1
-    });
-    this.toastr.success(`${item.name} added to cart`);
+  addToCart(item: any) {
+    const existItem = this.orderService.cart.find(x => x.menuItemId === item.id);
+    if (existItem) {
+      existItem.quantity += 1;
+      this.toastr.info(`${item.name} quantity increased`);
+    } else {
+      this.orderService.cart.push({
+        menuItemId: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: 1
+      });
+      this.toastr.success(`${item.name} added to cart`);
+    }
   }
-}
 
-removeFromCart(item: any) {
-  this.orderService.cart = this.orderService.cart.filter(x => x.menuItemId !== item.id);
-  this.toastr.warning(`${item.name} removed from cart`);
-}
-isInCart(itemId: string): boolean {
-  return this.orderService.cart.some(x => x.menuItemId === itemId);
-}
+  removeFromCart(item: any) {
+    this.orderService.cart = this.orderService.cart.filter(x => x.menuItemId !== item.id);
+    this.toastr.warning(`${item.name} removed from cart`);
+  }
+  isInCart(itemId: string): boolean {
+    return this.orderService.cart.some(x => x.menuItemId === itemId);
+  }
 
 
 }

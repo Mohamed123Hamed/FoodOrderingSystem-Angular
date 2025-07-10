@@ -18,9 +18,18 @@ import { MenuItem } from '../../shared/models/menuItem';
 export class SearchRestaurantsComponent {
 
   menuImages: string[] = [
-    '/images/10.jpg', '/images/11.jpg', '/images/12.jpg',
-    '/images/13.jpg', '/images/14.jpg', '/images/15.jpg',
-    '/images/16.jpg', '/images/17.jpg', '/images/18.jpg'
+     "/images/restuarant/1.jpg",
+     "/images/restuarant/2.jpg",
+     "/images/restuarant/3.jpg",
+     "/images/restuarant/4.jpg",
+     "/images/restuarant/5.jpg",
+     "/images/restuarant/6.jpg",
+     "/images/restuarant/7.jpg",
+     "/images/restuarant/8.jpg",
+     "/images/restuarant/9.jpg",
+     "/images/restuarant/10.jpg",
+     "/images/restuarant/11.jpg",
+     "/images/restuarant/112.jpg"
   ];
 
   cities: City[] = [];
