@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { OrderService } from '../../shared/services/order.service';
 import { NgFor } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reserve-component',
@@ -25,6 +26,7 @@ export class ReserveComponentComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private router: Router,
+    private toastr:ToastrService,
     private route: ActivatedRoute
   ) {}
 
@@ -39,6 +41,7 @@ export class ReserveComponentComponent implements OnInit {
       totalPrice: this.totalPrice,
       items: this.cartItems
     };
+    this.toastr.success(`successfuly confrimation`);
     this.router.navigate(['/cart']);
   }
 }

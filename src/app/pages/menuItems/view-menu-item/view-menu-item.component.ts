@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { OrderService } from '../../../shared/services/order.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-view-menu-item',
@@ -23,6 +24,7 @@ export class ViewMenuItemComponent implements OnInit {
     private route: ActivatedRoute,
     private orderService: OrderService,
     private router: Router,
+    private toastr: ToastrService,
     private http: HttpClient
   ) {}
 
@@ -87,10 +89,11 @@ export class ViewMenuItemComponent implements OnInit {
   }
 
 
-  addToCart(item: any) {
+addToCart(item: any) {
   const existItem = this.orderService.cart.find(x => x.menuItemId === item.id);
   if (existItem) {
     existItem.quantity += 1;
+    this.toastr.info(`${item.name} quantity increased`);
   } else {
     this.orderService.cart.push({
       menuItemId: item.id,
@@ -98,7 +101,17 @@ export class ViewMenuItemComponent implements OnInit {
       price: item.price,
       quantity: 1
     });
+    this.toastr.success(`${item.name} added to cart`);
   }
-  console.log('Cart:', this.orderService.cart);
 }
+
+removeFromCart(item: any) {
+  this.orderService.cart = this.orderService.cart.filter(x => x.menuItemId !== item.id);
+  this.toastr.warning(`${item.name} removed from cart`);
+}
+isInCart(itemId: string): boolean {
+  return this.orderService.cart.some(x => x.menuItemId === itemId);
+}
+
+
 }
