@@ -4,12 +4,13 @@ import { City } from '../models/city.model';
 import { Observable } from 'rxjs';
 import { Restaurant } from '../models/restaurant';
 import { MenuItem } from '../models/menuItem';
+import { environment } from '../../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantService {
-  private baseUrl = 'https://localhost:7059/api';
+  private baseUrl = environment.apiUrl;;
 
   constructor(private http: HttpClient) {}
 

@@ -44,12 +44,14 @@ export class CheckoutComponent implements OnInit {
   localStorage.setItem('userPhone', this.reservation.phone);
   this.orderService.placeOrder(body).subscribe({
     next: () => {
-     this.toastr.show('Order Placed Successfully 🎉');
+    //  this.toastr.show('Order Placed Successfully 🎉');
+    alert('Order placed successfully 🎉');
       this.orderService.cart = [];
       this.router.navigate(['/home']);
     },
     error: (err) => {
-      this.toastr.show('Failed to place order. Please try again.');
+      // this.toastr.show('Failed to place order. Please try again.');
+      alert('Failed to place order. Please try again.');
     }
   });
 }

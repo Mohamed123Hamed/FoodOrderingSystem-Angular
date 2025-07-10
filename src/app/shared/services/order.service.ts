@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class OrderService {
   itemName: string = '';
 
   constructor(private http: HttpClient) {}
-  private baseUrl = 'https://localhost:7059/api';
+  private baseUrl = environment.apiUrl;
 
 
   placeOrder(orderData: any) {
