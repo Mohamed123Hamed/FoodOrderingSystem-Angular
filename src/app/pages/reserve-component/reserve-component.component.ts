@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { OrderService } from '../../shared/services/order.service';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-reserve-component',
   templateUrl: './reserve-component.component.html',
   styleUrl: './reserve-component.component.css',
   standalone: true,
-  imports: [FormsModule]
+  imports: [FormsModule,NgFor]
 })
-export class ReserveComponentComponent {
+export class ReserveComponentComponent implements OnInit {
   reservation: any = {
     name: '',
     phone: '',
@@ -18,37 +19,26 @@ export class ReserveComponentComponent {
     address: ''
   };
 
-  price: number = 0;
-  itemName : string = '';
+  cartItems: any[] = [];
+  totalPrice: number = 0;
 
   constructor(
-    private orderService: OrderService, 
+    private orderService: OrderService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.price = Number(this.route.snapshot.queryParamMap.get('price')) || 0;
-    this.itemName = this.route.snapshot.queryParamMap.get('itemName') || '';
-  
+    this.cartItems = this.orderService.cart;
+    this.totalPrice = this.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }
 
-  // confirmReservation() {
-  //   this.orderService.reservation = {
-  //     ...this.reservation,
-  //     price: this.price
-  //   };
-
-  // this.orderService.totalPrice = this.price;
-  //   this.router.navigate(['/cart']);
-  // }
   confirmReservation() {
     this.orderService.reservation = {
       ...this.reservation,
-      price: this.price,
-      itemName:this.itemName
+      totalPrice: this.totalPrice,
+      items: this.cartItems
     };
     this.router.navigate(['/cart']);
   }
-
 }
