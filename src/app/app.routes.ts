@@ -38,6 +38,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/search-restaurants/search-restaurants.component').then((m) => m.SearchRestaurantsComponent),
       },
+    {
+        path: 'my-orders',
+        loadComponent: () =>
+          import('./pages/my-orders/my-orders.component').then((m) => m.MyOrdersComponent),
+      },
     // {
     //     path: 'delete-city/:id',
     //     loadComponent: () =>

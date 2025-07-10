@@ -1,0 +1,28 @@
+<div class="container my-5">
+  <h3 class="fw-bold mb-4 text-center">My Orders</h3>
+
+  <div *ngIf="loading" class="text-center text-muted">Loading...</div>
+  <div *ngIf="error" class="alert alert-danger text-center">{{ error }}</div>
+
+  <div *ngIf="orders.length > 0">
+    <div *ngFor="let order of orders" class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Order #{{ order.id }}</h5>
+        <p class="card-text">
+          <strong>Date:</strong> {{ order.orderDate  }}<br>
+          <strong>Status:</strong> {{ order.status }}<br>
+          <strong>Total:</strong> {{ order.totalAmount }} EGP<br>
+          <strong>Restaurant:</strong> {{ order.restaurantName }}
+        </p>
+
+        <h6 class="mt-3">Items:</h6>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between" *ngFor="let item of order.items">
+            <span>Item ID: {{ item.menuItemId }}</span>
+            <span>Qty: {{ item.quantity }} × {{ item.unitPrice }} EGP</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

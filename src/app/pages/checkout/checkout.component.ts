@@ -23,34 +23,64 @@ export class CheckoutComponent implements OnInit {
     this.totalPrice = this.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }
 
+  // confirmOrder() {
+  //   const items = this.cart.map(item => ({
+  //     menuItemId: item.menuItemId,
+  //     quantity: item.quantity
+  //   }));
+
+  //   const body = {
+  //     restaurantId: this.orderService.restaurantId,
+  //     customerName: this.reservation.name,
+  //     phone: this.reservation.phone,
+  //     email: this.reservation.email,
+  //     address: this.reservation.address,
+  //     totalPrice: this.totalPrice,
+  //     items
+  //   };
+
+  //   console.log('Sending order:', body);
+
+  //   this.orderService.placeOrder(body).subscribe({
+  //     next: () => {
+  //       alert('Order Placed Successfully 🎉');
+  //       this.orderService.cart = [];
+  //       this.router.navigate(['/home']);
+  //     },
+  //     error: (err) => {
+  //       console.error(err);
+  //       alert('Failed to place order. Please try again.');
+  //     }
+  //   });
+  // }
   confirmOrder() {
-    const items = this.cart.map(item => ({
-      menuItemId: item.menuItemId,
-      quantity: item.quantity
-    }));
+  const items = this.cart.map(item => ({
+    menuItemId: item.menuItemId,
+    quantity: item.quantity
+  }));
 
-    const body = {
-      restaurantId: this.orderService.restaurantId,
-      customerName: this.reservation.name,
-      phone: this.reservation.phone,
-      email: this.reservation.email,
-      address: this.reservation.address,
-      totalPrice: this.totalPrice,
-      items
-    };
+  const body = {
+    restaurantId: this.orderService.restaurantId,
+    customerName: this.reservation.name,
+    phone: this.reservation.phone,
+    email: this.reservation.email,
+    address: this.reservation.address,
+    items
+  };
 
-    console.log('Sending order:', body);
+  // ✅ حفظ رقم الهاتف
+  localStorage.setItem('userPhone', this.reservation.phone);
 
-    this.orderService.placeOrder(body).subscribe({
-      next: () => {
-        alert('Order Placed Successfully 🎉');
-        this.orderService.cart = [];
-        this.router.navigate(['/home']);
-      },
-      error: (err) => {
-        console.error(err);
-        alert('Failed to place order. Please try again.');
-      }
-    });
-  }
+  this.orderService.placeOrder(body).subscribe({
+    next: () => {
+      alert('Order Placed Successfully 🎉');
+      this.orderService.cart = [];
+      this.router.navigate(['/home']);
+    },
+    error: (err) => {
+      console.error(err);
+      alert('Failed to place order. Please try again.');
+    }
+  });
+}
 }
