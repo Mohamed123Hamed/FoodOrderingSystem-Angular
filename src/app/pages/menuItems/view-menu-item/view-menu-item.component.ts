@@ -69,4 +69,24 @@ export class ViewMenuItemComponent implements OnInit {
 //   console.log('Cart:', this.orderService.cart);
 // }
 
+
+// pagination
+currentPage: number = 1;
+itemsPerPage: number = 6;
+
+get paginatedItems() {
+  const start = (this.currentPage - 1) * this.itemsPerPage;
+  return this.menuItems.slice(start, start + this.itemsPerPage);
+}
+
+get totalPages(): number {
+  return Math.ceil(this.menuItems.length / this.itemsPerPage);
+}
+
+changePage(page: number) {
+  if (page >= 1 && page <= this.totalPages) {
+    this.currentPage = page;
+  }
+}
+
 }
