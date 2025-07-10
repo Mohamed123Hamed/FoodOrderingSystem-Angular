@@ -35,6 +35,7 @@ export class ViewMenuItemComponent implements OnInit {
   ngOnInit() {
     this.restaurantId = this.route.snapshot.paramMap.get('restaurantId')!;
     this.itemName = this.route.snapshot.paramMap.get('itemName')!;
+     this.orderService.restaurantId = this.restaurantId;
     this.loadMenuItems();
   }
 

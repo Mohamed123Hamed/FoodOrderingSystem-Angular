@@ -15,19 +15,22 @@ export class OrderService {
 
   constructor(private http: HttpClient) {}
 
-  placeOrder() {
-    const items = this.cart.map(item => ({
-      menuItemId: item.menuItemId,
-      quantity: 1
-    }));
+  // placeOrder() {
+  //   const items = this.cart.map(item => ({
+  //     menuItemId: item.menuItemId,
+  //     quantity: 1
+  //   }));
 
-    const body = {
-      restaurantId: this.restaurantId,
-      items
-    };
+  //   const body = {
+  //     restaurantId: this.restaurantId,
+  //     items
+  //   };
 
-    console.log('sending body', body);
+  //   console.log('sending body', body);
 
-    return this.http.post('https://localhost:7059/api/Order', body);
-  }
+  //   return this.http.post('https://localhost:7059/api/Order', body);
+  // }
+  placeOrder(orderData: any) {
+  return this.http.post('https://localhost:7059/api/Order', orderData);
+}
 }
