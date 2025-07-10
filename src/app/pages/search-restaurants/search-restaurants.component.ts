@@ -72,4 +72,24 @@ export class SearchRestaurantsComponent {
       error: (err) => console.error('Error fetching menu items', err)
     });
   }
+
+
+
+currentPage: number = 1;
+itemsPerPage: number = 6;
+
+get totalPages(): number {
+  return Math.ceil(this.filteredRestaurants.length / this.itemsPerPage);
+}
+
+get paginatedRestaurants(): Restaurant[] {
+  const start = (this.currentPage - 1) * this.itemsPerPage;
+  return this.filteredRestaurants.slice(start, start + this.itemsPerPage);
+}
+
+changePage(page: number) {
+  if (page >= 1 && page <= this.totalPages) {
+    this.currentPage = page;
+  }
+}
 }
