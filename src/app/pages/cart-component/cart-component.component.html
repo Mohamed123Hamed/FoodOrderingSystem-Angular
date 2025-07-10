@@ -9,37 +9,49 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Name</td>
-        <td>{{ reservation.name }}</td>
-      </tr>
-      <tr>
-        <td>Phone</td>
-        <td>{{ reservation.phone }}</td>
-      </tr>
-      <tr>
-        <td>Email</td>
-        <td>{{ reservation.email }}</td>
-      </tr>
-      <tr>
-        <td>Address</td>
-        <td>{{ reservation.address }}</td>
-      </tr>
-      <tr>
-        <td>Item</td>
-        <td>{{ reservation.itemName }}</td>
-      </tr>
-      <tr class="table-warning fw-bold">
-        <td>Price</td>
-        <td>{{ reservation.price }} EGP</td>
-      </tr>
+      <tr><td>Name</td><td>{{ reservation.name }}</td></tr>
+      <tr><td>Phone</td><td>{{ reservation.phone }}</td></tr>
+      <tr><td>Email</td><td>{{ reservation.email }}</td></tr>
+      <tr><td>Address</td><td>{{ reservation.address }}</td></tr>
     </tbody>
   </table>
+
+  <h4 class="fw-bold mt-5 mb-3 text-center">Selected Items</h4>
+
+  <table class="table table-striped text-center align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Item</th>
+        <th>Price (EGP)</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cart">
+        <td>{{ item.name }}</td>
+        <td>{{ item.price }}</td>
+        <td>
+          <div class="d-flex justify-content-center align-items-center gap-2">
+            <button class="btn btn-sm btn-outline-secondary" (click)="decreaseQuantity(item)">−</button>
+            <span>{{ item.quantity }}</span>
+            <button class="btn btn-sm btn-outline-secondary" (click)="increaseQuantity(item)">+</button>
+          </div>
+        </td>
+        <td>{{ item.price * item.quantity }} EGP</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr class="table-warning fw-bold">
+        <td colspan="3" class="text-end">Total</td>
+        <td>{{ totalPrice }} EGP</td>
+      </tr>
+    </tfoot>
+  </table>
+
   <div class="d-flex justify-content-end mt-4">
-  <button class="btn btn-warning" routerLink="/checkout">
-    <i class="fas fa-credit-card me-1"></i> Proceed to Checkout
-  </button>
+    <button class="btn btn-warning" routerLink="/checkout">
+      <i class="fas fa-credit-card me-1"></i> Proceed to Checkout
+    </button>
+  </div>
 </div>
-
-</div>
-
