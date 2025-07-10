@@ -1,0 +1,13 @@
+.not-found-container {
+  background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+  color: #fff;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.not-found-container h1 {
+  font-size: 8rem;
+}
+
+.not-found-container p {
+  max-width: 500px;
+}

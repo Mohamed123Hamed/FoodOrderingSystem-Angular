@@ -18,11 +18,6 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/reserve-component/reserve-component.component').then((m) => m.ReserveComponentComponent),
       },
-
-      // { path: 'reserve/:id', component: ReserveComponent },
-  // { path: 'cart', component: CartComponent },
-
-
     {
         path: 'menu-item/:id',
         loadComponent: () =>
@@ -43,11 +38,6 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/my-orders/my-orders.component').then((m) => m.MyOrdersComponent),
       },
-    // {
-    //     path: 'delete-city/:id',
-    //     loadComponent: () =>
-    //       import('./pages/cities/').then((m) => m.DeleteBookComponent),
-    //   },
     {
         path: '**',
         loadComponent: () =>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderService } from '../../shared/services/order.service';
 import { NgFor } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-checkout',
@@ -15,7 +16,9 @@ export class CheckoutComponent implements OnInit {
   cart: any[] = [];
   totalPrice: number = 0;
   restaurantId : string=''
-  constructor(private orderService: OrderService, private router: Router) {}
+  constructor(private orderService: OrderService, 
+                         private router: Router,
+                         private toastr:ToastrService) {}
 
   ngOnInit() {
     this.reservation = this.orderService.reservation;
@@ -23,36 +26,6 @@ export class CheckoutComponent implements OnInit {
     this.totalPrice = this.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }
 
-  // confirmOrder() {
-  //   const items = this.cart.map(item => ({
-  //     menuItemId: item.menuItemId,
-  //     quantity: item.quantity
-  //   }));
-
-  //   const body = {
-  //     restaurantId: this.orderService.restaurantId,
-  //     customerName: this.reservation.name,
-  //     phone: this.reservation.phone,
-  //     email: this.reservation.email,
-  //     address: this.reservation.address,
-  //     totalPrice: this.totalPrice,
-  //     items
-  //   };
-
-  //   console.log('Sending order:', body);
-
-  //   this.orderService.placeOrder(body).subscribe({
-  //     next: () => {
-  //       alert('Order Placed Successfully 🎉');
-  //       this.orderService.cart = [];
-  //       this.router.navigate(['/home']);
-  //     },
-  //     error: (err) => {
-  //       console.error(err);
-  //       alert('Failed to place order. Please try again.');
-  //     }
-  //   });
-  // }
   confirmOrder() {
   const items = this.cart.map(item => ({
     menuItemId: item.menuItemId,
@@ -68,18 +41,15 @@ export class CheckoutComponent implements OnInit {
     items
   };
 
-  // ✅ حفظ رقم الهاتف
   localStorage.setItem('userPhone', this.reservation.phone);
-
   this.orderService.placeOrder(body).subscribe({
     next: () => {
-      alert('Order Placed Successfully 🎉');
+     this.toastr.show('Order Placed Successfully 🎉');
       this.orderService.cart = [];
       this.router.navigate(['/home']);
     },
     error: (err) => {
-      console.error(err);
-      alert('Failed to place order. Please try again.');
+      this.toastr.show('Failed to place order. Please try again.');
     }
   });
 }

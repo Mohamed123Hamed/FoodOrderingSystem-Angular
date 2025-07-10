@@ -1,44 +1,67 @@
 <div class="container my-5">
-  <h3 class="fw-bold mb-4">Reserve Now</h3>
-  <div class="row">
-    <!-- الفورم -->
+  <h3 class="fw-bold mb-4 text-center text-primary">Reserve Now</h3>
+
+  <div class="row g-4 align-items-stretch">
+    
+    <!-- Form Column -->
     <div class="col-md-6">
-      <div class="row g-3">
-        <div class="col-12">
-          <input type="text" class="form-control" placeholder="Name" [(ngModel)]="reservation.name">
-        </div>
-        <div class="col-12">
-          <input type="text" class="form-control" placeholder="Phone" [(ngModel)]="reservation.phone">
-        </div>
-        <div class="col-12">
-          <input type="email" class="form-control" placeholder="Email" [(ngModel)]="reservation.email">
-        </div>
-        <div class="col-12">
-          <input type="text" class="form-control" placeholder="Address" [(ngModel)]="reservation.address">
-        </div>
+      <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column justify-content-center">
+        <form #reservationForm="ngForm" (ngSubmit)="confirmReservation()" novalidate>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Name</label>
+            <input type="text" class="form-control" placeholder="Enter your name"
+                   name="name" [(ngModel)]="reservation.name" required #name="ngModel">
+            <div class="text-danger small mt-1" *ngIf="name.invalid && name.touched">
+              Name is required.
+            </div>
+          </div>
 
-        <div class="col-12 mt-3">
-          <h6 class="fw-bold">Selected Items:</h6>
-          <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of cartItems">
-              {{ item.name }} <span class="badge bg-success rounded-pill">{{ item.price }} EGP × {{ item.quantity }}</span>
-            </li>
-          </ul>
-        </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Phone</label>
+            <input type="text" class="form-control" placeholder="Eg. 01012345678"
+                   name="phone" [(ngModel)]="reservation.phone"
+                   required pattern="^01[0-2,5]{1}[0-9]{8}$" #phone="ngModel">
+            <div class="text-danger small mt-1" *ngIf="phone.invalid && phone.touched">
+              <div *ngIf="phone.errors?.['required']">Phone is required.</div>
+              <div *ngIf="phone.errors?.['pattern']">Invalid Egyptian phone number.</div>
+            </div>
+          </div>
 
-        <div class="col-12 mt-3 text-end">
-          <strong>Total Price:</strong> {{ totalPrice }} <b>EGP</b>
-        </div>
-      </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Email</label>
+            <input type="email" class="form-control" placeholder="example@email.com"
+                   name="email" [(ngModel)]="reservation.email" required email #email="ngModel">
+            <div class="text-danger small mt-1" *ngIf="email.invalid && email.touched">
+              <div *ngIf="email.errors?.['required']">Email is required.</div>
+              <div *ngIf="email.errors?.['email']">Invalid email format.</div>
+            </div>
+          </div>
 
-      <div class="d-flex justify-content-end mt-4">
-        <button class="btn btn-warning" (click)="confirmReservation()">Confirm</button>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Address</label>
+            <input type="text" class="form-control" placeholder="Enter your address"
+                   name="address" [(ngModel)]="reservation.address" required #address="ngModel">
+            <div class="text-danger small mt-1" *ngIf="address.invalid && address.touched">
+              Address is required.
+            </div>
+          </div>
+
+          <div class="d-grid mt-4">
+            <button class="btn btn-warning fw-bold" type="submit" [disabled]="reservationForm.invalid">
+              <i class="fas fa-check-circle me-2"></i> Confirm Reservation
+            </button>
+          </div>
+        </form>
       </div>
     </div>
 
-    <!-- الصورة -->
+    <!-- Image Column -->
     <div class="col-md-6 d-flex align-items-center justify-content-center">
-      <img src="./images/10.jpg" class="img-fluid rounded shadow" alt="Reservation Image">
+      <img src="./images/10.jpg"
+           class="img-fluid rounded shadow"
+           alt="Reservation Image"
+           style="width: 100%; height: 100%; object-fit: cover; max-height: 600px;">
     </div>
+
   </div>
 </div>

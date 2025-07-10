@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { OrderService } from '../../shared/services/order.service';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './reserve-component.component.html',
   styleUrl: './reserve-component.component.css',
   standalone: true,
-  imports: [FormsModule,NgFor]
+  imports: [FormsModule,NgIf]
 })
 export class ReserveComponentComponent implements OnInit {
   reservation: any = {
@@ -35,13 +35,29 @@ export class ReserveComponentComponent implements OnInit {
     this.totalPrice = this.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }
 
+  // confirmReservation() {
+  //   this.orderService.reservation = {
+  //     ...this.reservation,
+  //     totalPrice: this.totalPrice,
+  //     items: this.cartItems
+  //   };
+  //   this.toastr.success(`successfuly confrimation`);
+  //   this.router.navigate(['/cart']);
+  // }
   confirmReservation() {
-    this.orderService.reservation = {
-      ...this.reservation,
-      totalPrice: this.totalPrice,
-      items: this.cartItems
-    };
-    this.toastr.success(`successfuly confrimation`);
-    this.router.navigate(['/cart']);
+  if (!this.reservation.name || !this.reservation.phone || !this.reservation.email || !this.reservation.address) {
+    this.toastr.error('Please fill in all required fields correctly.');
+    return;
   }
+
+  this.orderService.reservation = {
+    ...this.reservation,
+    totalPrice: this.totalPrice,
+    items: this.cartItems
+  };
+
+  this.toastr.success('Reservation confirmed successfully ✅');
+  this.router.navigate(['/cart']);
+}
+  
 }
